@@ -56,6 +56,10 @@
   #layerpanel label{display:inline-flex;align-items:center;gap:5px;background:var(--card);
     border:1px solid #dde4ea;border-radius:16px;padding:3px 11px 3px 7px;font-size:12.5px;cursor:pointer}
   #layerpanel .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+  #animbar button{background:var(--card);border:1px solid #b9c8d4;border-radius:8px;
+    padding:6px 12px;font-size:12.5px;color:var(--ink);cursor:pointer}
+  #animbar button:hover{border-color:var(--accent);color:var(--accent)}
+  #animbar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
   iframe.pdf{width:100%;height:620px;border:1px solid #dde4ea;border-radius:10px;background:#fff}
   pre.data{background:#101820;color:#cfe3d8;font-size:11.5px;line-height:1.45;padding:14px;border-radius:10px;overflow:auto;max-height:420px}
   details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;padding:6px 0}
@@ -196,6 +200,14 @@
     <span class="muted">Arrastrar = orbitar · rueda = zoom · clic derecho = mover</span>
   </div>
   <div class="toolbar" id="layerpanel"><span class="muted">capas…</span></div>
+  <div class="toolbar" id="animbar">
+    <b>Animación:</b>
+    <button data-anim="con">▶ vuelco a 150° — con flotador (vuelve)</button>
+    <button data-anim="sin">▶ vuelco a 150° — sin flotador (tortuga)</button>
+    <button data-anim="sail">▶ navegando</button>
+    <button data-anim="stop">■ reposo</button>
+    <span class="muted">física real del modelo — la misma simulación del GIF, ahora en 3D</span>
+  </div>
   <div id="viewer3d"><div class="hint">cargando visor 3D…</div></div>
   <p class="muted">El visor muestra el modelo completo por capas — las mismas del archivo
   Rhino — con un interruptor por capa (casco, bancos-tanque, quilla, timón, aparejo, velas,
@@ -399,9 +411,16 @@ try {
   wl.position.set(3.2, 0, 0.217);
   scene.add(wl);
 
+  // pivote en la maestra (x=3.2), eje de rolido = crujía en la línea base,
+  // igual que la simulación (rota alrededor del origen del cuerpo)
+  const pivot = new THREE.Group();
+  pivot.position.x = 3.2;
+  scene.add(pivot);
   const group = new THREE.Group();
-  scene.add(group);
+  group.position.x = -3.2;
+  pivot.add(group);
   const panel = document.getElementById('layerpanel');
+  const layerMap = {};
 
   const NAMES = {
     'hull': 'casco', 'bench-tanks': 'bancos-tanque', 'keel': 'quilla',
@@ -424,6 +443,7 @@ try {
 
   function buildLayered(data) {
     group.clear(); panel.innerHTML = '';
+    for (const k in layerMap) delete layerMap[k];
     for (const key of data.order) {
       const lay = data.layers[key];
       if (!lay || (!lay.meshes.length && !lay.lines.length)) continue;
@@ -450,19 +470,83 @@ try {
       }
       lg.visible = !DEFAULT_OFF.has(key);
       group.add(lg);
-      panel.appendChild(chip(NAMES[key] || key, '#' + col.getHexString(),
-                             lg.visible, v => lg.visible = v));
+      const el = chip(NAMES[key] || key, '#' + col.getHexString(),
+                      lg.visible, v => lg.visible = v);
+      panel.appendChild(el);
+      layerMap[key] = {grp: lg, input: el.querySelector('input')};
     }
     panel.appendChild(chip('agua', '#5a9cc8', true, v => wl.visible = v));
   }
 
+  // ---- animación (trayectorias reales de righting_sim.json) ----
+  const animbar = document.getElementById('animbar');
+  const hint = box.querySelector('.hint');
+  const baseHint = 'arrastrar para orbitar · rueda para zoom';
+  let SIM = null, animMode = null, animT0 = 0;
+
+  function setOverride(key, vis) {
+    if (layerMap[key]) layerMap[key].grp.visible = vis;
+  }
+  function stopAnim() {
+    animMode = null;
+    pivot.rotation.set(0, 0, 0);
+    pivot.position.z = 0;
+    for (const k in layerMap) layerMap[k].grp.visible = layerMap[k].input.checked;
+    hint.textContent = baseHint;
+    animbar.querySelectorAll('button').forEach(b => b.classList.remove('on'));
+  }
+  async function startAnim(mode, btn) {
+    if (!Object.keys(layerMap).length) return;   // solo el modelo por capas
+    if (mode !== 'sail' && !SIM)
+      SIM = await (await fetch('autoadrizante/righting_sim.json')).json();
+    animMode = mode; animT0 = performance.now();
+    setOverride('sails', mode === 'sail');       // velas abajo tras un vuelco
+    setOverride('lines', false);
+    setOverride('flotador-tope', mode !== 'sin');
+    animbar.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === btn));
+  }
+  animbar.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () =>
+      b.dataset.anim === 'stop' ? stopAnim() : startAnim(b.dataset.anim, b));
+  });
+
+  function tickAnim() {
+    if (!animMode) return;
+    const tt = (performance.now() - animT0) / 1000;
+    if (animMode === 'sail') {
+      pivot.rotation.x = THREE.MathUtils.degToRad(14 + 3.5 * Math.sin(0.55 * tt));
+      pivot.rotation.y = THREE.MathUtils.degToRad(2.0 * Math.sin(0.9 * tt + 1));
+      pivot.position.z = -0.02 + 0.05 * Math.sin(0.7 * tt);
+      hint.textContent = 'navegando — escora media 14°';
+      return;
+    }
+    const B = SIM.boats[animMode];
+    let t = tt % (SIM.t_end + 2.5);              // loop con pausa al final
+    t = Math.min(t, SIM.t_end - 1 / SIM.fps);
+    const ti = t * SIM.fps, i = Math.floor(ti), fr = ti - i;
+    const j = Math.min(i + 1, B.phi.length - 1);
+    const phi = B.phi[Math.min(i, B.phi.length - 1)] * (1 - fr) + B.phi[j] * fr;
+    let fold = Math.abs(phi) % 360;
+    if (fold > 180) fold = 360 - fold;
+    const gi = fold / SIM.zwl_step, g0 = Math.floor(gi), gf = gi - g0;
+    const g1 = Math.min(g0 + 1, B.zwl.length - 1);
+    const zwl = B.zwl[Math.min(g0, B.zwl.length - 1)] * (1 - gf) + B.zwl[g1] * gf;
+    pivot.rotation.x = THREE.MathUtils.degToRad(phi);
+    pivot.rotation.y = 0;
+    pivot.position.z = 0.217 - zwl;
+    hint.textContent = `soltado a ${SIM.start_deg}° · escora ${Math.round(fold)}° · t=${t.toFixed(1)} s`;
+  }
+
   const loader = new STLLoader();
   async function show(key) {
+    stopAnim();
+    animbar.style.display = key === 'variante' ? '' : 'none';
     if (key === 'variante') {
       const data = await (await fetch('autoadrizante/boat_web.json')).json();
       buildLayered(data);
     } else {
       group.clear(); panel.innerHTML = '';
+      for (const k in layerMap) delete layerMap[k];
       panel.appendChild(chip('agua', '#5a9cc8', wl.visible, v => wl.visible = v));
       loader.load('out/hull_selfrighting.stl', geo => {
         geo.computeVertexNormals();
@@ -478,7 +562,7 @@ try {
     cam.aspect = W() / H();
     cam.updateProjectionMatrix();
   });
-  (function loop() { requestAnimationFrame(loop); ctl.update(); renderer.render(scene, cam); })();
+  (function loop() { requestAnimationFrame(loop); tickAnim(); ctl.update(); renderer.render(scene, cam); })();
 } catch (e) {
   const h = document.querySelector('#viewer3d .hint');
   if (h) h.textContent = 'visor 3D no disponible (sin conexión al CDN de three.js) — usar las vistas de abajo o descargar el .3dm';
