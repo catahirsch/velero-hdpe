@@ -1,0 +1,156 @@
+
+==============================================================================
+1. HULL GEOMETRY
+==============================================================================
+  LOA                     6.480 m
+  LWL                     6.300 m
+  Max beam (sheer)        2.350 m
+  Beam at chine           1.880 m
+  Depth of canoe body     0.755 m
+  Hull shell area         17.41 m2
+  Deck + cockpit area     15.14 m2
+  Total shell area        32.55 m2
+  Cockpit                 3.20 m long x 1.72 m wide, sole at z=0.385 m
+
+==============================================================================
+2. HDPE SCANTLINGS
+==============================================================================
+  Design category C, m_LDC assumed 1230 kg
+  Material: HDPE (rotomoulding grade)
+    short-term flex modulus  1100 MPa
+    creep-derated modulus    250 MPa  <- design value
+    allowable bending stress 7.0 MPa
+
+  panel             p (kPa)   span   t_str  t_defl     governs
+  bottom               27.1   0.40    17.6    23.0  deflection
+  side                 21.4   0.40    15.6    21.2  deflection
+  deck                  7.5   0.46    10.6    17.2  deflection
+  cockpit_sole          7.5   0.36     8.3    13.5  deflection
+
+  Single-skin thickness required : 23.0 mm
+  Equivalent GRP thickness       : 7.8 mm
+  HDPE/GRP thickness ratio       : 2.96 x
+  Single-skin areal mass         : 21.8 kg/m2
+  -> single skin on 33 m2 would weigh 710 kg. Not viable.
+
+  DOUBLE SKIN: 5.0 mm skins, 50 mm gap, kiss-offs at 75 mm
+  panel             t_equiv    need  face MPa  skin req   verdict
+  bottom               42.2    23.0      1.44       4.3      PASS
+  side                 42.2    21.2      1.14       4.0      PASS
+  deck                 42.2    17.2      0.53       2.8      PASS
+  cockpit_sole         42.2    13.5      0.32       2.8      PASS
+  Areal mass: 9.5 kg/m2  (0.44x the single-skin mass)
+  All panels pass: True
+
+==============================================================================
+3. WEIGHT BUDGET  (750 kg cap, light incl. ballast)
+==============================================================================
+item                                     kg    z (m)      kg.m   note
+------------------------------------------------------------------------------------------------------
+HDPE shell (hull+deck)                346.3    0.420     145.4   9.5 kg/m2 x 32.5 m2
+keel case + pivot structure            22.0    0.350       7.7   welded PE bosses, bolted
+rudder + tiller (single, kick-up)      15.0    0.550       8.2   centreline transom-hung; client amendment 2026-08-06
+mast + boom + standing rig             32.0    3.100      99.2   short mast, no backstay
+sails (main + jib + furler)            16.0    2.200      35.2   square-top, lazy bag
+deck hardware + 2:1 systems            19.0    0.780      14.8   no winches
+electric motor                         26.0    0.550      14.3   ~4 kW outboard format
+battery                                31.6    0.220       6.9   3.0 kWh LiFePO4
+spray hood + cockpit tent              11.0    0.950      10.4   stowed
+anchor, lines, safety gear             18.0    0.400       7.2   
+keel ballast (lead)                   213.1   -0.860    -183.3   REMAINDER of the 750 kg cap
+------------------------------------------------------------------------------------------------------
+LIGHT (incl. ballast)                 750.0    0.222
+LOADED (6 crew + water)              1730.0    0.540
+
+  Like-for-like against the RS Aira, backed out from its published figures:
+    Aira shell mass, implied  : 367 kg  (GRP)
+    This shell, HDPE double   : 346 kg
+    Material penalty          : -21 kg   <- HDPE is roughly weight-neutral here
+    Electric drive adds       : +58 kg   <- this is what costs the ballast
+
+  Ballast available           : 213 kg
+  Ballast ratio               : 28.4 %
+  RS Aira 22 (GRP) for compare: 250 kg = 33.3 %
+  Ballast delta vs Aira       : -37 kg
+
+==============================================================================
+4. HYDROSTATICS
+==============================================================================
+  LIGHT   disp  750.0 kg   draft 0.217 m   z_wl 0.217 m   LCB 2.20 m   Awp 7.26 m2   TPc 74.4 kg/cm   VCG 0.222 m
+  LOADED  disp 1730.0 kg   draft 0.329 m   z_wl 0.329 m   LCB 2.31 m   Awp 9.25 m2   TPc 94.8 kg/cm   VCG 0.540 m
+
+==============================================================================
+5. SELF-DRAINING COCKPIT  (notes.txt line 30, the open question)
+==============================================================================
+  light ship               waterline z=0.217  sole z=0.385  freeboard to sole   +168 mm  -> drains
+  6 crew + water ballast   waterline z=0.329  sole z=0.385  freeboard to sole    +56 mm  -> drains
+  Sheer freeboard, light : 0.538 m
+
+==============================================================================
+6. RIGHTING ARM CURVES
+==============================================================================
+  case                 GZmax   @deg     AVS   A(0-90)  neg area  self-right
+  light/intact         0.667     46   113.0     0.760     0.334       False
+  light/flooded        0.667     46   112.2     0.754     0.320       False
+  loaded/intact        0.383     36    88.4     0.374     0.474       False
+  loaded/flooded       0.382     34    85.2     0.328     0.440       False
+
+  Downflooding angle (cockpit opening immerses): 37.0 deg
+  Beyond that angle only the 'flooded' curve is physically meaningful.
+
+==============================================================================
+7. SELF-RIGHTING VERDICT  (the stated requirement)
+==============================================================================
+  Requirement: recover unaided from 180 deg (fully inverted).
+  Governing case: light/flooded -- crew are in the water, cockpit is full.
+
+  RESULT: NOT self-righting.
+    AVS                     112.2 deg
+    Stable inverted?        yes -- GZ is negative approaching 180 deg
+    Energy holding inverted 0.320 m.rad
+    Ballast ratio           28.4 %
+
+  Reference points (neither self-rights from 180 deg either):
+    Contessa 26, fully decked, GRP           ballast ratio ~43 %, AVS ~157 deg
+    RS Aira 22, fully decked, GRP            ballast ratio 33 %, not self-righting
+  Note: the open cockpit is NOT the main culprit. Sealing it entirely
+  moves AVS by about a degree (see trade study section 4), because when
+  inverted the boat floats so high that the cockpit is mostly out of
+  the water anyway. The binding constraint is beam-to-depth ratio:
+  2.35 m beam on 0.75 m of depth is a hull that is stable upside down.
+
+==============================================================================
+8. SAIL-CARRYING CAPACITY
+==============================================================================
+  Upwind sail area  22.0 m2  (main 14.0 + jib 8.0)
+  SA/D ratio        15.5   (18-20 brisk daysailer, >22 overpowered)
+
+    true wind    tanks symmetric    windward tank only
+         8 kt              2 deg                 0 deg
+        12 kt              5 deg                 1 deg
+        16 kt             10 deg                 5 deg
+        20 kt             17 deg                12 deg
+        25 kt             27 deg                25 deg
+  Wind at peak righting moment: 28 kt symmetric, 30 kt with the windward tank  (gusts arrive sooner)
+  One tank to weather = 250 kg at 0.65 m: about the righting moment of 2 crew on the rail
+
+==============================================================================
+9. ENVELOPE COMPLIANCE
+==============================================================================
+  LOA                       6.48 m   limit    6.50  ok
+  Beam                      2.35 m   limit    2.50  ok
+  Displacement (light)    750.00 kg  limit  750.00  ok
+  Sail area upwind         22.00 m2  limit   22.00  ok
+  Water ballast           487.80 L   limit  500.00  ok
+  Draft, keel down          1.29 m   limit    1.30  ok
+
+  Violations: 0
+
+
+------------------------------------------------------------------------------
+BASE MODEL PROVENANCE
+------------------------------------------------------------------------------
+  RS Aira 22 (published): LOA 6.5 m, beam 2.2 m, disp 750.0 kg, ballast 250.0 kg, sail 14.0+8.0 m2, GRP
+  Flow 19 (from notes.txt, URL 403): beam 2.3 m, disp 450.0 kg, swing keel 70.0 kg, water ballast 2x60.0 kg
+
+Report written to /Users/catalinahirsch/Desktop/bote/out/report.txt

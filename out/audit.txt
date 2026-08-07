@@ -1,0 +1,57 @@
+======================================================================================
+BUILDABILITY AUDIT
+======================================================================================
+[PASS] Fin steel mass within keel budget
+       computed: 50 kg fin -> 163 kg lead
+       required: fin + lead = 213 kg
+       note:     a 25 mm solid fin would weigh ~100 kg and eat half the lead
+[PASS] Bulb volume holds its lead
+       computed: 14.3 L = 162 kg capacity
+       required: >= 163 kg
+[PASS] Keel assembly reaches VCG -0.86 m
+       computed: bulb centroid must sit at z = -0.992 m
+       required: bulb physically on the fin (tip region)
+       note:     bulb spans -1.077..-0.907 m
+[PASS] Draft keel-down within CBD < 1.30
+       computed: 1.294 m to bulb bottom
+       required: < 1.30 m
+[PASS] Fin plate bending stress (sailing)
+       computed: 157 MPa at root
+       required: <= 237 MPa (S355 / 1.5)
+       note:     RM=4.9 kN.m; add 6 mm root doublers for grounding shock
+[PASS] Retracted fin+bulb fit under the cockpit sole
+       computed: bulb height 0.17 m + clearance
+       required: < 0.385 m sole height
+       note:     case: ~1.21 m long x 0.17 m wide slot
+[PASS] Bench tank swallows 250 kg of water
+       computed: bench 558 L, fill depth 186 mm
+       required: >= 250 L
+       note:     water centroid z = 0.478 (model uses 0.48)
+[PASS] Water centroid matches the stability model
+       computed: 0.478 m
+       required: 0.48 m +-0.02
+[PASS] Six adults seated on the benches
+       computed: 10 places at 0.55 m each
+       required: >= 6
+[PASS] Boom clears seated heads ('botavara alta')
+       computed: boom 1.80 m vs head top 1.75 m
+       required: boom above heads
+       note:     seated tall adult: pan + 0.95 m
+[PASS] Mast spine bending under rig compression
+       computed: 138 MPa (P=11.0 kN)
+       required: <= 160 MPa (6082-T6 / 1.5)
+[PASS] Chainplate bolts (6x M10 A4)
+       computed: 0.61 kN/bolt
+       required: <= 10 kN/bolt working
+[PASS] Outboard clears the centreline rudder
+       computed: motor bracket offset y = +0.45 m (stbd)
+       required: no overlap with stock at y=0
+       note:     scuppers split port/stbd of the stock
+[PASS] Cockpit sole above waterline at 1730 kg
+       computed: +56 mm
+       required: >= 40 mm
+[PASS] Main planform closes at 14 m2 with the raised boom
+       computed: P=7.54 m, E=2.73 m, clew at x=1.52 m
+       required: clew inside the cockpit span (x > 0.5)
+======================================================================================
+15/15 checks pass

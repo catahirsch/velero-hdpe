@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velero abierto HDPE 6.48 m — visor del proyecto</title>
+<style>
+  :root{
+    --ink:#232d37; --accent:#285a82; --accent2:#117733; --warn:#8a2b2b;
+    --rule:#96a5b2; --bg:#f4f6f8; --card:#ffffff; --side:#1d2733;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  a{color:var(--accent)}
+  /* ---- layout ---- */
+  #side{position:fixed;top:0;left:0;bottom:0;width:230px;background:var(--side);color:#dce4ec;padding:22px 0;overflow-y:auto}
+  #side h1{font-size:15px;margin:0 18px 2px;color:#fff}
+  #side .sub{font-size:11px;color:#8fa3b5;margin:0 18px 18px}
+  #side nav a{display:block;padding:8px 18px;color:#c3cfda;text-decoration:none;font-size:13px;border-left:3px solid transparent}
+  #side nav a:hover{background:#26333f;color:#fff}
+  #side nav a.active{border-left-color:#e8622d;background:#26333f;color:#fff}
+  #side .foot{margin:20px 18px 0;font-size:10.5px;color:#718596;line-height:1.5}
+  main{margin-left:230px;padding:26px 34px 80px;max-width:1180px}
+  section{margin-bottom:56px;scroll-margin-top:16px}
+  h2{color:var(--accent);font-size:22px;border-bottom:2px solid var(--rule);padding-bottom:6px}
+  h3{color:var(--accent);font-size:16px;margin-top:26px}
+  .card{background:var(--card);border:1px solid #dde4ea;border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(20,30,40,.06)}
+  .muted{color:#5c6b78;font-size:13px}
+  .ok{color:var(--accent2);font-weight:600}
+  .warn{color:var(--warn);font-weight:600}
+  /* ---- tables ---- */
+  table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--card)}
+  th{color:var(--accent);text-align:left;border-bottom:2px solid var(--rule);padding:7px 10px;font-size:12.5px}
+  td{border-bottom:1px solid #e3e9ee;padding:7px 10px;vertical-align:top}
+  tr.pick{background:#eaf5ee;outline:2px solid var(--accent2)}
+  /* ---- galleries ---- */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr 1fr}
+  figure{margin:0;background:var(--card);border:1px solid #dde4ea;border-radius:10px;padding:10px}
+  figure img{width:100%;display:block;border-radius:6px;cursor:zoom-in}
+  figcaption{font-size:12px;color:#5c6b78;padding:8px 2px 0}
+  /* ---- hero ---- */
+  .hero{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;align-items:start}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .stat{background:var(--card);border:1px solid #dde4ea;border-radius:10px;padding:12px 14px}
+  .stat b{display:block;font-size:20px;color:var(--accent)}
+  .stat span{font-size:11.5px;color:#5c6b78}
+  .stat.green b{color:var(--accent2)}
+  /* ---- viewer / pdf ---- */
+  #viewer3d{width:100%;height:560px;border-radius:10px;background:linear-gradient(#eaf3fa,#c8dff0);position:relative;overflow:hidden}
+  #viewer3d canvas{display:block}
+  #viewer3d .hint{position:absolute;left:12px;bottom:10px;font-size:11.5px;color:#33566e;background:rgba(255,255,255,.65);padding:3px 8px;border-radius:6px}
+  .toolbar{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
+  .toolbar select,.toolbar label{font-size:13px}
+  iframe.pdf{width:100%;height:620px;border:1px solid #dde4ea;border-radius:10px;background:#fff}
+  pre.data{background:#101820;color:#cfe3d8;font-size:11.5px;line-height:1.45;padding:14px;border-radius:10px;overflow:auto;max-height:420px}
+  details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;padding:6px 0}
+  .md{background:var(--card);border:1px solid #dde4ea;border-radius:10px;padding:6px 22px;font-size:14px;line-height:1.55}
+  .md table{font-size:13px}
+  .md h1{font-size:20px;color:var(--accent)} .md h2{font-size:16px;border:none;color:var(--accent)}
+  .dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+  .dl a{background:var(--card);border:1px solid #dde4ea;border-radius:10px;padding:11px 14px;text-decoration:none;font-size:13px;display:block}
+  .dl a b{display:block;color:var(--accent)} .dl a span{color:#5c6b78;font-size:11.5px}
+  .dl a:hover{border-color:var(--accent)}
+  /* ---- lightbox ---- */
+  #lb{position:fixed;inset:0;background:rgba(10,16,22,.92);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+  #lb img{max-width:94vw;max-height:92vh;border-radius:6px}
+  #servewarn{display:none;background:#fdf1ec;border:1px solid #e0b3a0;color:#8a2b2b;border-radius:10px;padding:12px 16px;font-size:13.5px;margin-bottom:18px}
+  .placa{background:#fdf6ec;border:2px solid var(--warn);border-radius:10px;padding:12px 16px;color:var(--warn);font-weight:700;font-size:14px;letter-spacing:.3px}
+  @media(max-width:900px){#side{display:none}main{margin-left:0}.hero,.g2,.g3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<aside id="side">
+  <h1>Velero abierto HDPE 6.48&nbsp;m</h1>
+  <p class="sub">Variante auto-adrizante · visor del proyecto</p>
+  <nav id="nav">
+    <a href="#resumen" class="active">Resumen</a>
+    <a href="#variante">La variante auto-adrizante</a>
+    <a href="#opciones">Opciones estudiadas</a>
+    <a href="#modelo3d">Modelo 3D</a>
+    <a href="#planos">Planos (blueprints)</a>
+    <a href="#diseno">Diseño y colores</a>
+    <a href="#documentos">Documentos y PDFs</a>
+    <a href="#datos">Datos y descargas</a>
+  </nav>
+  <p class="foot">Generado desde el modelo de cálculo del proyecto.<br><br>
+  Documento de ingeniería preliminar; no sustituye el proyecto firmado por ingeniero naval.</p>
+</aside>
+
+<main>
+
+<div id="servewarn">
+  <b>Los datos no cargan bajo <code>file://</code>.</b> Para ver todo (tablas dinámicas,
+  3D, PDFs), serví la carpeta con: <code>python3 -m http.server 8000</code>
+  desde la carpeta del proyecto y abrí <code>http://localhost:8000</code>
+  (o doble clic en <code>visor.command</code>).
+</div>
+
+<!-- ================= RESUMEN ================= -->
+<section id="resumen">
+  <h2>Resumen</h2>
+  <div class="hero">
+    <div>
+      <figure><img src="autoadrizante/foto_patagonia_navegando.png" alt="render navegando">
+      <figcaption>Render desde el modelo de cálculo: flotación y escora reales, flotador de tope de 60 L a la vista.</figcaption></figure>
+    </div>
+    <div>
+      <div class="stats">
+        <div class="stat"><b>6.48 m</b><span>eslora · manga 2.35 m · 6 plazas</span></div>
+        <div class="stat"><b>750 kg</b><span>desplazamiento rosca (con lastre)</span></div>
+        <div class="stat green"><b id="st-rec">156°</b><span>vuelve solo hasta esta escora (rosca, cockpit inundado)</span></div>
+        <div class="stat green"><b id="st-turtle">2516 → 302 J</b><span>energía que sostiene la tortuga: antes → ahora</span></div>
+        <div class="stat"><b>2.5 kg</b><span>flotador de tope 60 L — se paga con plomo de quilla</span></div>
+        <div class="stat"><b>22/22</b><span>verificaciones físicas de constructibilidad PASS</span></div>
+      </div>
+      <div class="card">
+        <b>La idea en una frase:</b> mantener el daysailer abierto y liviano del brief,
+        y comprar los grados de adrizado que faltan con <b>volumen sellado en altura</b>
+        (mástil sellado + flotador de tope) en vez de plomo — modelado en las curvas GZ,
+        no estimado.
+      </div>
+      <div class="placa">AUTO-ADRIZANTE SOLO CON: QUILLA ABAJO Y TRABADA · TANQUES VACÍOS<br>
+      QUILLA ARRIBA = SOLO BOTADURA / PLAYA</div>
+    </div>
+  </div>
+  <figure style="margin-top:14px"><img src="autoadrizante/selfrighting.gif" alt="animación auto-adrizado">
+  <figcaption>Animación física sobre las curvas GZ reales: el mismo casco soltado tumbado a 150° —
+  sin el paquete de tope queda tortuga; con mástil sellado + 60 L vuelve solo.</figcaption></figure>
+</section>
+
+<!-- ================= VARIANTE ================= -->
+<section id="variante">
+  <h2>La variante auto-adrizante</h2>
+  <div class="grid g2">
+    <figure><img src="autoadrizante/gz_curves.png" alt="curvas GZ">
+    <figcaption>Las curvas GZ 0–180°: el volumen sellado del tope entra a la hidrostática.
+    Verde = con paquete de tope, tanques vacíos.</figcaption></figure>
+    <figure><img src="autoadrizante/perfil_flotador.png" alt="perfil con flotador">
+    <figcaption>Lo único que cambia: flotador 60 L / 2.5 kg, mástil sellado (30 L),
+    traba de quilla como ítem de seguridad primaria.</figcaption></figure>
+  </div>
+  <div class="card">
+    <b>La afirmación honesta:</b> con quilla abajo y trabada y tanques vacíos, el barco vuelve
+    solo desde cualquier escora hasta <b id="claim-rec">156°</b>. El bolsillo invertido residual
+    (<span id="claim-pocket">302 J</span>) queda detrás de una barrera de ~2600 J: en cualquier
+    mar capaz de volcar este barco, no es un estado de reposo. No es «auto-adrizante desde
+    180.0°» matemático — esa opción también está estudiada (ver <a href="#opciones">opciones</a>).
+  </div>
+  <h3>Qué cambia vs. el proyecto base</h3>
+  <div class="card md" id="md-cambios"><p class="muted">cargando cambios.md…</p></div>
+</section>
+
+<!-- ================= OPCIONES ================= -->
+<section id="opciones">
+  <h2>Opciones de auto-adrizado estudiadas</h2>
+  <p class="muted">Ocho configuraciones medidas con la misma física (rosca, cockpit inundado,
+  quilla abajo y trabada). Tabla generada en vivo desde <code>opciones.json</code>.</p>
+  <div class="card" style="overflow-x:auto">
+    <table id="tbl-opciones">
+      <thead><tr><th></th><th>Opción</th><th>Vuelve solo hasta</th><th>Tortuga residual</th><th>GZ máx</th><th>¿180.0° literal?</th></tr></thead>
+      <tbody><tr><td colspan="6" class="muted">cargando opciones.json…</td></tr></tbody>
+    </table>
+  </div>
+  <div class="grid g2">
+    <figure><img src="autoadrizante/opciones_board.png" alt="board de opciones">
+    <figcaption>Las seis configuraciones sin tocar el casco + la referencia angosta.</figcaption></figure>
+    <figure><img src="autoadrizante/opciones_gz.png" alt="curvas de opciones">
+    <figcaption>Las cinco curvas que ordenan la decisión.</figcaption></figure>
+  </div>
+  <div class="card">
+    <b>La escalera de decisión:</b>
+    <span class="ok">HOY → A2</span> (flotador rígido 60 L, pasivo, USD 240–760).
+    Si se exige el 180.0° literal sin cambiar el barco → <b>agregar B</b> (bolsa inflable de tope,
+    acepta régimen de mantenimiento). Si debe ser literal <i>y</i> pasivo →
+    <span class="warn">variante D angosta</span>: es otro barco (4 plazas, ~1040 kg).
+    Detalle completo: sección 4 de la <a href="#documentos">presentación</a> y
+    <a href="autoadrizante/opciones.txt" target="_blank">opciones.txt</a>.
+  </div>
+</section>
+
+<!-- ================= MODELO 3D ================= -->
+<section id="modelo3d">
+  <h2>Modelo 3D interactivo</h2>
+  <div class="toolbar">
+    <label for="selmodel"><b>Modelo:</b></label>
+    <select id="selmodel">
+      <option value="variante">Variante auto-adrizante (casco 2.35 m + aparejo + flotador)</option>
+      <option value="angosta">Opción D — casco angosto 1.80 m (referencia)</option>
+    </select>
+    <label><input type="checkbox" id="chkwl" checked> línea de flotación</label>
+    <span class="muted">Arrastrar = orbitar · rueda = zoom · clic derecho = mover</span>
+  </div>
+  <div id="viewer3d"><div class="hint">cargando visor 3D…</div></div>
+  <p class="muted">El modelo completo por capas (quilla, timón, bancos-tanque, flotador,
+  flotaciones) está en el archivo Rhino:
+  <a href="autoadrizante/boat_autoadrizante.3dm" download>boat_autoadrizante.3dm</a> ·
+  malla del casco: <a href="autoadrizante/hull_autoadrizante.stl" download>hull_autoadrizante.stl</a></p>
+  <div class="grid g2">
+    <figure><img src="autoadrizante/preview_3dm.png" alt="preview 3dm">
+    <figcaption>Vista del 3DM: casco, quilla, timón, aparejo, bancos-tanque y flotador (capa nueva).</figcaption></figure>
+    <figure><img src="autoadrizante/preview_cockpit.png" alt="preview cockpit">
+    <figcaption>Cockpit de 6 plazas con bancos-tanque — sin cambios en la variante.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ================= PLANOS ================= -->
+<section id="planos">
+  <h2>Planos de construcción (8 láminas A3)</h2>
+  <p class="muted">L1 disposición general · L2 formas · L3 sección maestra · L4 quilla ·
+  L5 espejo y timón · L6 plano vélico · L7 lastre de agua · <b>L8 flotador de tope y condición de diseño</b>.
+  Cotas en metros. Preliminar — sujeto a revisión de ingeniero naval.</p>
+  <iframe class="pdf" src="autoadrizante/planos.pdf" title="planos"></iframe>
+  <p><a href="autoadrizante/planos.pdf" download>Descargar planos.pdf</a> ·
+     tabla de puntos para loftear: <a href="autoadrizante/offsets_autoadrizante.txt" target="_blank">offsets_autoadrizante.txt</a> ·
+     plano de líneas: <a href="autoadrizante/hull_lines.png" target="_blank">hull_lines.png</a></p>
+</section>
+
+<!-- ================= DISEÑO ================= -->
+<section id="diseno">
+  <h2>Diseño y colores</h2>
+  <p class="muted">En HDPE el color va en la resina (se decide al moldear, no se pinta) y es pasante:
+  los rayones no se notan. Regla técnica: cubierta y bancos siempre claros; el flotador va en el
+  color de acento — un elemento de seguridad se lleva a la vista.</p>
+  <figure><img src="autoadrizante/diseno_colores.png" alt="paletas de color">
+  <figcaption>Cuatro paletas propuestas sobre el modelo 3D: PATAGONIA · CHILOÉ · AIRA · ARENA.</figcaption></figure>
+  <figure><img src="autoadrizante/diseno_perfil.png" alt="elementos de estilo">
+  <figcaption>Elementos de estilo: todo resuelto en el molde o soldado, nunca pintado.</figcaption></figure>
+  <div class="grid g2">
+    <figure><img src="autoadrizante/foto_patagonia_navegando.png" alt="Patagonia navegando">
+    <figcaption>PATAGONIA — navegando, escora 14°, tanque de barlovento.</figcaption></figure>
+    <figure><img src="autoadrizante/foto_aira_fondeado.png" alt="Aira fondeado">
+    <figcaption>AIRA — fondeado en calma, flotación rosca de cálculo.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ================= DOCUMENTOS ================= -->
+<section id="documentos">
+  <h2>Documentos y PDFs</h2>
+  <h3>Presentación completa (incluye la comparación de opciones, sección 4)</h3>
+  <iframe class="pdf" src="autoadrizante/presentacion.pdf" title="presentación"></iframe>
+  <p><a href="autoadrizante/presentacion.pdf" download>Descargar presentacion.pdf</a></p>
+
+  <h3>Especificación de la variante</h3>
+  <div class="card md" id="md-specs"><p class="muted">cargando specs.md…</p></div>
+
+  <h3>Datos crudos del modelo</h3>
+  <details><summary>report.txt — corrida completa de la variante</summary><pre class="data" data-src="autoadrizante/report.txt">…</pre></details>
+  <details><summary>audit.txt — 22 verificaciones de constructibilidad</summary><pre class="data" data-src="autoadrizante/audit.txt">…</pre></details>
+  <details><summary>costs.txt — costos con el delta de la variante</summary><pre class="data" data-src="autoadrizante/costs.txt">…</pre></details>
+  <details><summary>opciones.txt — exploración de opciones completa</summary><pre class="data" data-src="autoadrizante/opciones.txt">…</pre></details>
+</section>
+
+<!-- ================= DATOS ================= -->
+<section id="datos">
+  <h2>Datos y descargas</h2>
+  <div class="dl">
+    <a href="autoadrizante/boat_autoadrizante.3dm" download><b>boat_autoadrizante.3dm</b><span>modelo Rhino por capas, con flotador de tope</span></a>
+    <a href="autoadrizante/hull_autoadrizante.stl" download><b>hull_autoadrizante.stl</b><span>malla del casco (metros)</span></a>
+    <a href="autoadrizante/offsets_autoadrizante.txt"><b>offsets_autoadrizante.txt</b><span>tabla de puntos para loftear</span></a>
+    <a href="autoadrizante/planos.pdf" download><b>planos.pdf</b><span>8 láminas de construcción acotadas</span></a>
+    <a href="autoadrizante/presentacion.pdf" download><b>presentacion.pdf</b><span>resumen + opciones + recomendación</span></a>
+    <a href="autoadrizante/specs.md"><b>specs.md</b><span>especificación de la variante</span></a>
+    <a href="autoadrizante/cambios.md"><b>cambios.md</b><span>registro de cambios vs. baseline</span></a>
+    <a href="autoadrizante/opciones.json"><b>opciones.json</b><span>resultados de las 8 opciones (datos)</span></a>
+    <a href="autoadrizante/report.txt"><b>report.txt</b><span>pesos, curvas, dimensionado</span></a>
+    <a href="autoadrizante/audit.txt"><b>audit.txt</b><span>auditoría 22/22 PASS</span></a>
+    <a href="autoadrizante/costs.txt"><b>costs.txt</b><span>modelo de costos + delta</span></a>
+    <a href="out/boat_selfrighting.3dm" download><b>boat_selfrighting.3dm</b><span>opción D — casco angosto (referencia)</span></a>
+  </div>
+  <h3>Proyecto base (para comparar)</h3>
+  <div class="dl">
+    <a href="out/presentacion.pdf" download><b>out/presentacion.pdf</b><span>presentación del proyecto base</span></a>
+    <a href="out/planos.pdf" download><b>out/planos.pdf</b><span>planos del base (7 láminas)</span></a>
+    <a href="out/report.txt"><b>out/report.txt</b><span>corrida completa del base</span></a>
+    <a href="docs/03-self-righting.md"><b>docs/03-self-righting.md</b><span>el estudio original del conflicto</span></a>
+  </div>
+</section>
+
+</main>
+
+<div id="lb"><img alt=""></div>
+
+<script>
+// ---------- utilidades ----------
+const $ = s => document.querySelector(s);
+const isFile = location.protocol === 'file:';
+
+// lightbox
+document.querySelectorAll('figure img').forEach(im => {
+  im.addEventListener('click', () => { $('#lb img').src = im.src; $('#lb').style.display = 'flex'; });
+});
+$('#lb').addEventListener('click', () => $('#lb').style.display = 'none');
+
+// nav highlight
+const links = [...document.querySelectorAll('#nav a')];
+const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) {
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+  }});
+}, {rootMargin: '-30% 0px -60% 0px'});
+secs.forEach(s => io.observe(s));
+
+// ---------- datos dinámicos ----------
+async function grab(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(url);
+  return r;
+}
+
+(async () => {
+  try {
+    const R = await (await grab('autoadrizante/opciones.json')).json();
+    const order = ['BASE','A1','A2','A3','B','C0','C','D'];
+    const tb = $('#tbl-opciones tbody');
+    tb.innerHTML = '';
+    for (const k of order) {
+      const r = R[k]; if (!r) continue;
+      const hasta = r.true_180 ? '<b class="ok">180.0°</b>' : Math.round(r.rec_limit) + '°';
+      const lit = r.true_180 ? '<span class="ok">SÍ</span>' : 'no';
+      const tr = document.createElement('tr');
+      if (k === 'A2') tr.className = 'pick';
+      tr.innerHTML = `<td><b>${k}</b></td><td>${r.label.replace(/^\S+\s/, '')}${k==='A2' ? ' — <b class="ok">ELEGIDA</b>' : ''}</td>` +
+        `<td>${hasta}</td><td>${Math.round(r.pocket_j)} J</td>` +
+        `<td>${r.gz_max.toFixed(2)} m</td><td>${lit}</td>`;
+      tb.appendChild(tr);
+    }
+    $('#st-rec').textContent = Math.round(R.A2.rec_limit) + '°';
+    $('#claim-rec').textContent = Math.round(R.A2.rec_limit) + '°';
+    $('#st-turtle').textContent = `${Math.round(R.BASE.pocket_j)} → ${Math.round(R.A2.pocket_j)} J`;
+    $('#claim-pocket').textContent = Math.round(R.A2.pocket_j) + ' J';
+  } catch (e) { if (isFile) $('#servewarn').style.display = 'block'; }
+
+  // markdown
+  try {
+    const marked = (await import('https://cdn.jsdelivr.net/npm/marked@12/lib/marked.esm.js')).marked;
+    for (const [sel, url] of [['#md-cambios','autoadrizante/cambios.md'],
+                              ['#md-specs','autoadrizante/specs.md']]) {
+      try { $(sel).innerHTML = marked.parse(await (await grab(url)).text()); }
+      catch (e) { $(sel).innerHTML = `<p class="muted">no se pudo cargar ${url} — <a href="${url}">abrir directo</a></p>`; }
+    }
+  } catch (e) { /* sin CDN: dejar links */ }
+
+  // pre data
+  document.querySelectorAll('pre.data').forEach(async p => {
+    try { p.textContent = await (await grab(p.dataset.src)).text(); }
+    catch (e) { p.textContent = 'no se pudo cargar ' + p.dataset.src; }
+  });
+})();
+</script>
+
+<!-- ---------- visor 3D ---------- -->
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+try {
+  const THREE = await import('three');
+  const {OrbitControls} = await import('three/addons/controls/OrbitControls.js');
+  const {STLLoader} = await import('three/addons/loaders/STLLoader.js');
+
+  const box = document.getElementById('viewer3d');
+  box.querySelector('.hint').textContent = 'arrastrar para orbitar · rueda para zoom';
+  const W = () => box.clientWidth, H = () => box.clientHeight;
+
+  const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+  renderer.setSize(W(), H());
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  box.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(42, W() / H(), 0.05, 200);
+  cam.up.set(0, 0, 1);                       // z hacia arriba, como el modelo
+  cam.position.set(11, -8.5, 5.5);
+  const ctl = new OrbitControls(cam, renderer.domElement);
+  ctl.target.set(3.2, 0, 1.4);
+  ctl.enableDamping = true;
+
+  scene.add(new THREE.HemisphereLight(0xf2f7fb, 0x51697c, 1.05));
+  const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+  sun.position.set(6, -9, 12);
+  scene.add(sun);
+
+  const matHull = new THREE.MeshStandardMaterial({color: 0xb6c6d3, metalness: .05, roughness: .55, side: THREE.DoubleSide});
+  const matDark = new THREE.MeshStandardMaterial({color: 0x3c3c46, roughness: .5});
+  const matFloat = new THREE.MeshStandardMaterial({color: 0xc0392b, roughness: .45});
+
+  // línea de flotación
+  const wl = new THREE.Mesh(new THREE.PlaneGeometry(30, 30),
+    new THREE.MeshStandardMaterial({color: 0x5a9cc8, transparent: true, opacity: .30, side: THREE.DoubleSide}));
+  wl.position.set(3.2, 0, 0.217);
+  scene.add(wl);
+  document.getElementById('chkwl').addEventListener('change', e => wl.visible = e.target.checked);
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  function rig() {
+    const g = new THREE.Group();
+    const mast = new THREE.Mesh(new THREE.CylinderGeometry(.05, .05, 8.6, 14), matDark);
+    mast.rotation.x = Math.PI / 2;             // cilindro Y -> eje Z
+    mast.position.set(4.25, 0, .86 + 4.3);
+    g.add(mast);
+    const boom = new THREE.Mesh(new THREE.CylinderGeometry(.04, .04, 2.95, 12), matDark);
+    boom.rotation.z = Math.PI / 2;
+    boom.position.set(2.87, 0, 1.8);
+    g.add(boom);
+    const fl = new THREE.Mesh(new THREE.SphereGeometry(1, 26, 18), matFloat);
+    fl.scale.set(.5, .17, .17);
+    fl.position.set(4.25, 0, 9.55);
+    g.add(fl);
+    return g;
+  }
+
+  const loader = new STLLoader();
+  const MODELS = {
+    variante: {url: 'autoadrizante/hull_autoadrizante.stl', rig: true},
+    angosta:  {url: 'out/hull_selfrighting.stl', rig: false},
+  };
+  function show(key) {
+    group.clear();
+    loader.load(MODELS[key].url, geo => {
+      geo.computeVertexNormals();
+      group.add(new THREE.Mesh(geo, matHull));
+      if (MODELS[key].rig) group.add(rig());
+    });
+  }
+  show('variante');
+  document.getElementById('selmodel').addEventListener('change', e => show(e.target.value));
+
+  addEventListener('resize', () => {
+    renderer.setSize(W(), H());
+    cam.aspect = W() / H();
+    cam.updateProjectionMatrix();
+  });
+  (function loop() { requestAnimationFrame(loop); ctl.update(); renderer.render(scene, cam); })();
+} catch (e) {
+  const h = document.querySelector('#viewer3d .hint');
+  if (h) h.textContent = 'visor 3D no disponible (sin conexión al CDN de three.js) — usar las vistas de abajo o descargar el .3dm';
+}
+</script>
+
+</body>
+</html>

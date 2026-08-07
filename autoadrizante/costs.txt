@@ -1,0 +1,95 @@
+================================================================================================
+COST ANALYSIS -- BUILDING IN CHILE
+Assumptions: 950 CLP/USD | IVA 19% included in all totals | imports +15% freight, 0% duty (FTA)
+Bands are LOW / MID / HIGH planning prices, 2026. [QUOTE] lines need real quotes.
+================================================================================================
+
+--- SHELL -- ROUTE A: WELDED PE500 SHEET (one-off / prototype) ---------------------------------
+item                                                   qty unit       LOW      MID      HIGH  basis
+PE500 sheet (net 420 kg + 15% waste)                   483 kg       2,012    2,586     3,449  [QUOTE]  Plastigen / Polymerland / Plastisan / Siplas -- quote cut-to-size
+HDPE welding rod 4-5 mm                                 16 kg         152      190       248  [QUOTE]
+PE consumables (tips, tacks, test coupons)               1 lot        178      298       476  [EST]
+SUBTOTAL (USD, IVA incl.)                                           2,343    3,074     4,172
+
+--- SHELL -- ROUTE B: ROTOMOULDED (series of 20) -----------------------------------------------
+item                                                   qty unit       LOW      MID      HIGH  basis
+Rotomoulding powder (380 kg incl. yield)               380 kg         724      859     1,040  [QUOTE]  UV8 rotograde, compounded colour
+Moulding service, 2 shots (hull + deck)                  1 lot      2,142    3,570     5,950  [QUOTE]  machine >= 4 m swing -- capability to be confirmed in Chile
+Tooling amortisation (1/20 of tool)                      1 boat     3,570    5,355     7,735  [EST]  series production only; a one-off carries the whole tool
+PE welding (bench walls, keel case, details)             8 kg          76       95       124  [QUOTE]
+SUBTOTAL (USD, IVA incl.)                                           6,512    9,879    14,849
+
+--- COMMON: BALLAST, FOILS, STRUCTURE, RIG, SAILS, SYSTEMS, SAFETY -----------------------------
+item                                                   qty unit       LOW      MID      HIGH  basis
+Lead, cast bulb (delivered, cast)                      170 kg         566      688       850  [QUOTE]  LME ~2.1 + casting; Chilean foundry
+Keel fin S355 25 mm, profiled + HDG                     40 kg         190      262       357  [QUOTE]  plasma-cut + galvanised, local maestranza
+Keel pivot pin 316 + acetal bushes + cheeks              1 lot        416      654     1,012  [EST]
+Rudder blade PE500 20 mm + alloy stock (single)          1 lot        357      536       774  [EST]
+Gudgeons + tiller fittings                               1 lot        274      438       684  [EST]
+6082-T6 plate & sections (spine, beams, backers)        38 kg         317      384       497  [QUOTE]
+Machining/fabrication of alloy parts                     1 lot        714    1,190     1,904  [QUOTE]
+Mast section 8.6 m + fittings                            1 lot      2,737    3,695     4,927  [QUOTE]  dinghy/sportboat extrusion; Selden/AG+ class
+Boom + gooseneck + outhaul                               1 lot        821    1,163     1,642  [QUOTE]
+Standing rigging 5 mm 1x19 + terminals                   1 lot        411      616       890  [MKT]
+Running rigging (2:1 systems, halyards)                  1 lot        479      684     1,026  [MKT]
+Deck hardware: blocks, clutches, cleats, padeyes         1 lot      1,916    2,600     3,558  [MKT]  no winches -- this is the saving that pays for it
+Square-top main 14 m2, 2 reefs                           1 lot      2,463    3,148     4,105  [QUOTE]  Chilean loft (e.g. local) or imported
+Furling jib 8 m2                                         1 lot      1,232    1,642     2,190  [QUOTE]
+Furler (small-boat, e.g. CDI FF2 class)                  1 lot        958    1,300     1,779  [MKT]
+Lazy bag + cover                                         1 lot        298      416       595  [QUOTE]  local lonería
+Electric outboard ~4 kW (Navy/Cruise class)              1 lot      5,748    7,527     9,579  [MKT]  incl. throttle/cables
+LiFePO4 48 V ~3 kWh + BMS + box                          1 lot      1,505    2,326     3,558  [MKT]
+DC-DC 48>12, panel, wiring, nav lights (LED)             1 lot        684    1,026     1,505  [MKT]
+Bilge: electric pump + manual pump + bailer              1 lot        342      520       753  [MKT]  manual pump required (PNA 1-18 4.6)
+Scoops, ball valves, cross-connect, vents, hoses         1 lot        616      890     1,300  [EST]
+12 V diaphragm air pump (tank empty)                     1 lot        205      301       479  [MKT]
+Sight tubes, placards, sole strap anchors                1 lot        143      214       333  [EST]
+A4 (316) fasteners, oversize washers, comp. tubes        1 lot        616      890     1,300  [MKT]
+Acrylic bow hatches x2, PE-framed                        1 lot        411      616       890  [EST]
+Butyl tape, gaskets, sealants (PE-compatible)            1 lot        205      301       479  [MKT]
+Spray hood + cockpit tent (lonería)                      1 lot      1,071    1,547     2,261  [QUOTE]
+Cuddy fabric shelf, nets, misc canvas                    1 lot        178      298       476  [QUOTE]
+Safety equipment per A-41/014 (bahia..12 MN)             1 lot        821    1,232     1,916  [MKT]  lifejackets ISO 12402, flares, extinguisher, anchor 7 kg + line
+SUBTOTAL (USD, IVA incl.)                                          26,694   37,104    51,619
+
+--- REGULATORY (Chile) -------------------------------------------------------------------------
+item                                                   qty unit       LOW      MID      HIGH  basis
+Matricula, roll test day, cert fees, photos              1 lot        298      536       952  [EST]  Capitania de Puerto
+SUBTOTAL (USD, IVA incl.)                                             298      536       952
+
+================================================================================================
+TOTALS (USD, IVA included)
+================================================================================================
+
+ROUTE A -- welded sheet one-off
+  Materials + components:      29,334      40,713       56,743
+  Labour (650-1000 h @ 14-25 USD/h):    10,829      17,136       29,750
+  Contingency 10%:             4,016       5,785        8,649
+  TOTAL USD:                  44,179      63,634       95,142
+  TOTAL CLP (millions):         42.0        60.5         90.4
+
+ROUTE B -- rotomoulded, per boat in a series of 20
+  Materials + components:      33,503      47,518       67,419
+  Labour (350-600 h @ 14-25 USD/h):     5,831       9,639       17,850
+  Contingency 10%:             3,933       5,716        8,527
+  TOTAL USD:                  43,268      62,873       93,796
+  TOTAL CLP (millions):         41.1        59.7         89.1
+
+Route B one-off (whole tool on one boat): add USD 60,000-130,000 tooling.
+
+NOT included: trailer, mooring, Argentine project/engineering fees
+(ingeniero naval -- quote in Argentina, typ. USD 2,500-6,000 for a boat
+this size incl. Encomienda), sail-number cert, delivery.
+
+==============================================================================
+DELTA VARIANTE AUTO-ADRIZANTE  (sobre cualquiera de las rutas de arriba)
+==============================================================================
+  Flotador de tope 60 L (PE rotomoldeado o soplado, 1.00 x 0.34) USD 120-350
+  Soporte de tope 6082-T6 + 4x M6 A4                             USD 40-90
+  Sellado del perfil (espuma pie/tope/cajeras, mano de obra)     USD 80-200
+  Conducto de drizas / drizas externas (delta vs interno)        USD 0-120
+  Traba de quilla reforzada (ya prevista: sin delta)             USD 0
+  ------------------------------------------------------------------------
+  TOTAL DELTA                                                    USD 240-760
+  ~0.5 % del costo medio del barco (USD 64,400). El paquete se paga con
+  2.5 kg de plomo de quilla, que ademas ahorra ~USD 10 de plomo.

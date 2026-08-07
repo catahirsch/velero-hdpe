@@ -1,0 +1,80 @@
+==============================================================================
+SELF-RIGHTING TRADE STUDY
+==============================================================================
+Requirement: GZ > 0 at every angle up to 180 deg, cockpit flooded,
+light ship (crew in the water). Displacement floats free in these
+sweeps -- ballast is added on top of the fixed weight.
+
+------------------------------------------------------------------------------
+1. BALLAST ALONE  (beam 2.35 m as designed)
+------------------------------------------------------------------------------
+   ballast    disp   ratio   GZmax     AVS  self-right
+       213     751   28.4%   0.667   112.2       False
+       300     838   35.8%   0.730   119.6       False
+       400     938   42.7%   0.791   126.3       False
+       500    1038   48.2%   0.839   131.7       False
+       600    1138   52.7%   0.864   136.1       False
+       800    1338   59.8%   0.898   143.4       False
+      1000    1538   65.0%   0.934   148.9       False
+
+  Ballast alone does not get there at this beam, at any weight that
+  could float on a 6.5 m hull. Form stability inverted wins.
+
+------------------------------------------------------------------------------
+2. BEAM  (ballast held at the 213 kg the budget allows)
+------------------------------------------------------------------------------
+      beam   GZmax     AVS  neg area  self-right
+      1.80   0.441   137.9     0.035       False
+      1.95   0.503   122.6     0.110       False
+      2.10   0.583   117.2     0.189       False
+      2.25   0.634   113.8     0.270       False
+      2.35   0.667   112.2     0.317       False
+      2.50   0.716   110.3     0.384       False
+
+------------------------------------------------------------------------------
+3. COCKPIT WIDTH  (narrower cockpit = more sealed side tank)
+------------------------------------------------------------------------------
+    half-w   seats   GZmax     AVS  self-right
+      0.45     2-3   0.667   112.9       False
+      0.55     2-3   0.667   112.9       False
+      0.65     4-5   0.667   112.9       False
+      0.75     4-5   0.667   112.3       False
+      0.866 abreast   0.667   112.2       False
+
+------------------------------------------------------------------------------
+4. UPPER BOUND: fully decked (watertight cockpit, not an open boat)
+------------------------------------------------------------------------------
+  ballast  213 kg, sealed: AVS  113.0 deg, self-righting False
+  ballast  300 kg, sealed: AVS  120.1 deg, self-righting False
+  ballast  400 kg, sealed: AVS  126.4 deg, self-righting False
+  Even sealed, this beam-to-depth ratio has a stable inverted state.
+
+------------------------------------------------------------------------------
+5. FRONTIER: minimum ballast for true self-righting, vs beam
+------------------------------------------------------------------------------
+  beam 1.70 m : needs 383 kg ballast  -> displacement 920 kg  (42% ratio)
+  beam 1.80 m : needs 452 kg ballast  -> displacement 988 kg  (46% ratio)
+  beam 1.90 m : needs 647 kg ballast  -> displacement 1184 kg  (55% ratio)
+  beam 2.00 m : needs 842 kg ballast  -> displacement 1379 kg  (61% ratio)
+  beam 2.10 m : needs 1059 kg ballast  -> displacement 1596 kg  (66% ratio)
+  beam 2.20 m : needs 1352 kg ballast  -> displacement 1889 kg  (72% ratio)
+  beam 2.35 m : not achievable below 1400 kg of ballast
+
+------------------------------------------------------------------------------
+6. DEEPER CANOE BODY  (freeboard scaled up, beam 2.10 m)
+------------------------------------------------------------------------------
+  depth x1.00 (sheer 0.76 m): AVS  136.0 deg, self-righting False
+  depth x1.15 (sheer 0.87 m): AVS  138.1 deg, self-righting False
+  depth x1.30 (sheer 0.99 m): AVS  148.1 deg, self-righting False
+  depth x1.45 (sheer 1.10 m): AVS  160.1 deg, self-righting False
+
+==============================================================================
+READING
+==============================================================================
+  True 180-degree self-righting is a beam problem before it is a
+  ballast problem. The same wide, shallow hull that carries a 6-seat
+  cockpit and 22 m2 of sail is stable upside down, and no amount of
+  lead that a 6.5 m hull can float changes that at 2.35 m beam.
+
+  The requirement and the brief are mutually exclusive as written.
+  Something has to give -- see docs/03-self-righting.md.

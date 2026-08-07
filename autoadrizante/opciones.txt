@@ -1,0 +1,60 @@
+======================================================================================
+OPCIONES DE AUTO-ADRIZADO, CONTRA LOS REQUISITOS DE notes.txt
+======================================================================================
+Condicion: rosca, cockpit inundado (tripulacion en el agua).
+Lo que notes.txt no negocia: bote abierto 6 plazas (linea 19/37),
+DIS<750, manga para el cockpit, quilla pivotante, lastre de agua,
+electrico. El casco de 2.35 m queda fijo en todas menos D.
+
+  opcion                                       vuelve solo   tortuga   GZ>0desde 180
+                                                     hasta  residual       
+  ------------------------------------------------------------------------------
+  BASE casco desnudo                                 110°     2493 J     no
+  A1 mastil sellado solo (30 L)                      123°     1626 J     no
+  A2 sellado + flotador 60 L (elegida)               156°      291 J     no
+  A3 sellado + flotador 80 L                         162°      153 J     no
+  B bolsa inflable 150 L (disparada)                 180°        0 J     SI
+  C0 tanques bajo piso llenos, sin tope              121°     2387 J     no
+  C tanques bajo piso + flotador 60 L                148°      701 J     no
+  D casco angosto 1.80 m / 500 kg                    180°        0 J     SI
+
+--------------------------------------------------------------------------------------
+LECTURA
+--------------------------------------------------------------------------------------
+  - A1 es gratis y ya recupera 13 grados mas que el casco desnudo:
+    sellar el perfil deberia hacerse en CUALQUIER caso.
+  - A2 -> A3: 20 L mas compran ~6 grados. Rendimiento decreciente;
+    el bolsillo queda atrapado contra 180 por simetria.
+  - B (inflable) es el unico camino a 180.0 LITERAL sin tocar el
+    casco: disparada, GZ queda positivo hasta 180. El costo es que
+    es un sistema armado: disparo hidrostatico, botella, rearmado
+    tras cada uso, inspeccion anual. En un bote de dia familiar la
+    fiabilidad pasiva del flotador rigido vale mas que la estetica;
+    como UPGRADE (rigido 60 L + bolsa encima) cierra el requisito
+    literal si la certificacion lo pide.
+  - C0 confirma docs/03: el mecanismo RNLI solo NO alcanza a esta
+    manga. C (tanques bajos + flotador) es lo maximo sin tocar el
+    casco -- pero es una CONDICION (tanques llenos), no una
+    configuracion: con tanques vacios vuelve a ser A2. Ademas
+    revisa la decision del cliente de tanques-en-bancos y roba
+    ~55 mm de piso. Solo tiene sentido si se acepta llenar tanques
+    como regla al salir con mar formada.
+  - D sigue siendo el unico 180.0 literal, y sigue rompiendo el
+    brief (4 plazas, ~990 kg, remolque con frenos).
+
+--------------------------------------------------------------------------------------
+MATRIZ CONTRA notes.txt
+--------------------------------------------------------------------------------------
+  requisito                                     BASE      A1      A2      A3       B      C0       C       D
+  6 plazas / cockpit grande (l.19)                SI      SI      SI      SI      SI      SI      SI    no:4
+  DIS < 750 rosca (l.5)                           SI      SI      SI      SI      SI      SI      SI no:1036
+  bancos-tanque = asientos (dec. cliente)         SI      SI      SI      SI      SI      no      no      SI
+  sin sistemas armados / pasivo                   SI      SI      SI      SI      no      SI      SI      SI
+  tope de mastil limpio (estetica)                SI      SI      no      no      SI      SI      no      SI
+  anti-tortuga efectivo                           no   parc.      SI      SI      SI      no      SI      SI
+
+  RECOMENDACION: A2 como esta (pasivo, 2.5 kg, ~USD 240-760).
+  B como upgrade si se exige el 180.0 literal sin cambiar el casco
+  (o si el flotador molesta en regata). C como modo operativo solo
+  si se re-abre la decision de los tanques. D solo si se exige el
+  180.0 literal Y pasivo -- y se aceptan 4 plazas y ~1040 kg.

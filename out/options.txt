@@ -1,0 +1,58 @@
+==============================================================================
+RESOLUTION OPTIONS FOR THE SELF-RIGHTING REQUIREMENT
+==============================================================================
+
+------------------------------------------------------------------------------
+OPTION B -- narrow the hull until it self-rights
+------------------------------------------------------------------------------
+  beam 1.75 m : ballast 417 kg, displacement 954 kg (+27% vs cap), ratio 44%
+  beam 1.80 m : ballast 452 kg, displacement 988 kg (+32% vs cap), ratio 46%
+  beam 1.90 m : ballast 647 kg, displacement 1184 kg (+58% vs cap), ratio 55%
+  Cost: loses the 6-abreast cockpit, and busts DIS 750.
+
+------------------------------------------------------------------------------
+OPTION C -- crowned 'turtle' deck: sealed buoyancy high when upright
+------------------------------------------------------------------------------
+    camber   beam  ballast needed  displacement
+      0.15   2.35  not achievable             -
+      0.25   2.35  not achievable             -
+      0.35   2.35  not achievable             -
+      0.25   2.10  not achievable             -
+      0.35   2.10  not achievable             -
+  Cost: a domed deck fights the flat sunbathing foredeck (notes line 44)
+  and the cockpit tent, and raises the boom further.
+
+------------------------------------------------------------------------------
+OPTION D -- deeper canoe body plus moderate narrowing
+------------------------------------------------------------------------------
+  beam 2.10, depth x1.30 (sheer 0.99 m): ballast 835 kg, disp 1372 kg
+  beam 2.10, depth x1.45 (sheer 1.10 m): ballast 771 kg, disp 1308 kg
+  beam 2.00, depth x1.30 (sheer 0.99 m): ballast 615 kg, disp 1152 kg
+  beam 1.90, depth x1.20 (sheer 0.91 m): ballast 1003 kg, disp 1540 kg
+  Cost: freeboard grows, windage and trailer height with it.
+
+------------------------------------------------------------------------------
+OPTION A -- masthead buoyancy (prevents inversion instead of curing it)
+------------------------------------------------------------------------------
+  Baseline as designed: AVS 111 deg, inverted-stable, energy holding it there 0.33 m.rad
+  A masthead float does not appear on a GZ curve -- it works by making
+  180 degrees unreachable, so the boat stops at roughly the AVS angle
+  (111 deg) and the crew right it from there with the floor straps
+  already in the brief (notes line 46).
+
+  Sizing: to hold the rig up at ~110 deg the float must displace more
+  than the rig's submerged weight plus a margin. For a 32 kg alloy rig
+  a 45-60 litre masthead float is the usual answer: about 2.5 kg.
+  Cost: 2.5 kg and some windage aloft. Nothing else in the brief moves.
+
+==============================================================================
+SUMMARY
+==============================================================================
+  A  masthead float      2.5 kg   keeps every other requirement       
+     -> NOT true self-righting; recovers to ~110 deg, crew right it
+  B  narrow to 1.80 m    +157 kg  loses 6-abreast cockpit, busts DIS
+  C  turtle deck         varies   fights the sunbathing deck + tent
+  D  deeper + narrower   varies   more freeboard, more windage
+
+  Only B, C and D deliver the requirement as literally stated.
+  All three break something else in notes.txt. That is the decision.

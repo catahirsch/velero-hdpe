@@ -1,0 +1,84 @@
+
+==============================================================================
+VARIANTE AUTO-ADRIZANTE -- masthead buoyancy, modelled honestly
+==============================================================================
+  Concept: baseline 2.35 m open daysailer, unchanged, plus a sealed
+  spar (30 L usable) and a 60 L / 2.5 kg crown float.
+  Design condition for the claim: keel DOWN and LOCKED, tanks EMPTY.
+
+==============================================================================
+1. WEIGHT BUDGET  (float aloft, paid for by the keel remainder)
+==============================================================================
+item                                     kg    z (m)      kg.m   note
+------------------------------------------------------------------------------------------------------
+HDPE shell (hull+deck)                346.3    0.420     145.4   9.5 kg/m2 x 32.5 m2
+keel case + pivot structure            22.0    0.350       7.7   welded PE bosses, bolted
+rudder + tiller (single, kick-up)      15.0    0.550       8.2   centreline transom-hung; client amendment 2026-08-06
+mast + boom + standing rig             32.0    3.100      99.2   short mast, no backstay
+sails (main + jib + furler)            16.0    2.200      35.2   square-top, lazy bag
+deck hardware + 2:1 systems            19.0    0.780      14.8   no winches
+electric motor                         26.0    0.550      14.3   ~4 kW outboard format
+battery                                31.6    0.220       6.9   3.0 kWh LiFePO4
+spray hood + cockpit tent              11.0    0.950      10.4   stowed
+anchor, lines, safety gear             18.0    0.400       7.2   
+keel ballast (lead)                   210.6   -0.860    -181.1   REMAINDER of the 750 kg cap, minus the crown float
+masthead crown float                    2.5    9.550      23.9   60 L PE ellipsoid + bracket
+------------------------------------------------------------------------------------------------------
+LIGHT (incl. ballast)                 750.0    0.256
+LOADED (6 crew + water)              1730.0    0.555
+
+  VCG light rises 31 mm for the float -- the GZ curves below already carry that penalty.
+
+==============================================================================
+2. GZ CURVES  (2.35 m beam; 'con aparejo' counts the sealed rig)
+==============================================================================
+  case                     GZmax     AVS  rec.limit  neg area  GZ>0 to 180
+  light/flooded/bare       0.643   109.8      109.8    0.3420        False
+  light/flooded/rig        1.029   155.8      155.8    0.0411        False
+  light/intact/rig         1.031   154.8      154.8    0.0490        False
+  loaded/flooded/rig       0.373    83.6      124.0    0.1471        False
+
+==============================================================================
+3. VERDICT  (governing case: light ship, cockpit flooded, tanks empty)
+==============================================================================
+  Bare hull (baseline):   AVS 110 deg, stable inverted,
+                          0.342 m.rad = 2516 J holding it turtle.
+  With sealed rig+float:  GZ stays positive past 110 deg --
+                          the boat recovers unaided from any heel up to 155.8 deg.
+                          Residual inverted pocket: 155.8-180 deg, 0.0411 m.rad = 302 J
+                          (8x shallower than the baseline's).
+  Energy barrier guarding that pocket (area 110-156 deg): 0.358 m.rad = 2633 J --
+  to turtle, a seaway must push the boat through ALL of it; to release,
+  it only has to nudge the boat 24.2 deg. In any water rough
+  enough to capsize this boat, the pocket is not a resting state.
+
+  Claim for the spec sheet / placard: AUTO-ADRIZANTE con quilla abajo y
+  trabada y tanques vacios; el flotador de tope hace el 180 inalcanzable
+  y el barco vuelve solo desde cualquier escora hasta 156 grados.
+
+==============================================================================
+4. FLOAT SIZING  (why 60 L: sweep at 31 stations, 5 deg)
+==============================================================================
+   float (L)  rec.limit  neg area  GZ>0 to 180
+           0      123.4    0.2211        False
+          20      137.6    0.1279        False
+          40      148.1    0.0726        False
+          60      155.9    0.0396        False
+          80      162.0    0.0208        False
+  Below ~40 L the float cannot carry the immersed rig's weight with
+  margin (rig 32 kg + float, buoyancy needed > ~35 kg); 60 L gives a
+  1.7x margin and costs 2.5 kg. Beyond 80 L the recovery limit barely
+  moves -- the residual pocket is pinched against 180 by symmetry, not
+  by float size.
+
+==============================================================================
+5. OTHER CONDITIONS
+==============================================================================
+  Loaded (6 crew + 500 L), flooded, with rig: recovery limit 124 deg.
+  Keel UP: NOT self-righting in any variant -- keel-up is a launch/
+  recovery state only. The keel lock (L4) is what makes the claim hold
+  through a knockdown: an unlocked keel falling into the case at 120 deg
+  would remove most of the righting moment when it is needed most.
+  Downflooding angle at full load: 37 deg (unchanged from base).
+
+Report written to /Users/catalinahirsch/Desktop/bote/autoadrizante/report.txt

@@ -1,0 +1,74 @@
+{
+ "BASE": {
+  "label": "BASE casco desnudo",
+  "rec_limit": 109.7102101663049,
+  "pocket_mrad": 0.33893781725636996,
+  "pocket_j": 2492.883409197885,
+  "true_180": false,
+  "gz_max": 0.6432951539690386,
+  "mass": 750.0
+ },
+ "A1": {
+  "label": "A1 mastil sellado solo (30 L)",
+  "rec_limit": 123.3571854403559,
+  "pocket_mrad": 0.22114078924181965,
+  "pocket_j": 1626.4877406137177,
+  "true_180": false,
+  "gz_max": 0.6432951539690386,
+  "mass": 750.0
+ },
+ "A2": {
+  "label": "A2 sellado + flotador 60 L (elegida)",
+  "rec_limit": 155.92706406633255,
+  "pocket_mrad": 0.03956204820685833,
+  "pocket_j": 290.97837003584044,
+  "true_180": false,
+  "gz_max": 1.0228042509050277,
+  "mass": 750.0
+ },
+ "A3": {
+  "label": "A3 sellado + flotador 80 L",
+  "rec_limit": 161.96232683781986,
+  "pocket_mrad": 0.02075998010481457,
+  "pocket_j": 152.68939417115985,
+  "true_180": false,
+  "gz_max": 1.262360992445665,
+  "mass": 750.0
+ },
+ "B": {
+  "label": "B bolsa inflable 150 L (disparada)",
+  "rec_limit": 179.99999999999994,
+  "pocket_mrad": 3.88054627369912e-18,
+  "pocket_j": 2.854136933622861e-14,
+  "true_180": true,
+  "gz_max": 2.1257860777105257,
+  "mass": 750.0
+ },
+ "C0": {
+  "label": "C0 tanques bajo piso llenos, sin tope",
+  "rec_limit": 120.67239133001148,
+  "pocket_mrad": 0.1947193520610449,
+  "pocket_j": 2386.9306673618075,
+  "true_180": false,
+  "gz_max": 0.6042549537277802,
+  "mass": 1250.0
+ },
+ "C": {
+  "label": "C tanques bajo piso + flotador 60 L",
+  "rec_limit": 148.43335294165465,
+  "pocket_mrad": 0.05716731062954509,
+  "pocket_j": 700.7747584815354,
+  "true_180": false,
+  "gz_max": 0.7046502383974247,
+  "mass": 1250.0
+ },
+ "D": {
+  "label": "D casco angosto 1.80 m / 500 kg",
+  "rec_limit": 180.0,
+  "pocket_mrad": 0.0,
+  "pocket_j": 0.0,
+  "true_180": true,
+  "gz_max": 0.5930056451259559,
+  "mass": 980.3628979632447
+ }
+}

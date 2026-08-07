@@ -1,0 +1,60 @@
+HDPE finalists
+Dimensions
+LOA <6.50
+BEA <2.50
+DIS <750
+SQM <22
+BAL <500
+CBD <1.30
+
+Shipyard QA
+ISO Certification
+
+Objective short
+Request clear main ideas
+Done well defined 
+
+Aira 22
+https://www.rssailing.com/project/rs-aira/
+large cockpit 6 seats
+bow cuddy no cabin, estante tela
+furling jib
+botavara alta, mástil corto, vela cuadrada
+
+
+Flow 19
+https://archinavale.carbonmade.com/projects/6600079
+BEA 2.30 CND 1.30 DSP 450
+70 kg swing keel
+X2 60 kg water ballast
+H francbordo y h piso cockpit ??
+sin molinetes 2:1 purchase system
+ruders pivotean
+no traveler nor backstay
+
+
+Notes:
+open sailboat
+reserva flotabilidad y auto-adrizante
+x2 rudders short cane
+pivot keel
+rigging
+electric engine
+
+proa tomar sol
+doble tambucho proa
+cinturones piso xa adrizar quitapon
+listón 1”x1” xa afirmar pie
+spray hood
+cockpit tent
+self draining cockpit
+cockpit desagota directo
+popa semi-abierta
+
+centered boom rig wo traveller
+lazy bag main and auto furling jib
+empty water ballast with air pump
+fill water ballast while sailing (how?)
+no backstay
+
+3dm output format
