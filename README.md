@@ -63,8 +63,11 @@ rule: with a full crew sail tanks-empty; short-handed, fill the windward tank.
 
 ## Client viewer
 
+**Live:** https://catahirsch.github.io/velero-hdpe/
+
 Everything — specs, options data, blueprints, PDFs, interactive 3D model,
-design/colour studies, downloads — in one browser page:
+design/colour studies, downloads — in one browser page. To run it locally
+instead:
 
 ```bash
 python3 -m http.server 8000     # from the project folder (or double-click visor.command)
