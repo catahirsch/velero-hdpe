@@ -106,7 +106,7 @@ def export_boat_3dm(design: Design, mb: MastBuoyancy) -> None:
     export_3dm.add_keel(model, attrs["keel"], d)
     export_3dm.add_rudders(model, attrs["rudders"], geom)
     export_3dm.add_rig(model, attrs, d, geom)
-    export_3dm.add_tanks(model, attrs["bench-tanks"], d)
+    export_3dm.add_tanks(model, attrs["bench-tanks"], d, geom)
     export_3dm.add_waterlines(model, attrs["waterlines"], z_light, z_loaded, d.hull.loa)
     export_3dm.add_lines(model, attrs["lines"], geom)
     # El flotador: elipsoide 1.00 x 0.34 m carenado proa-popa en el tope.

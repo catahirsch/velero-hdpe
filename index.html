@@ -53,6 +53,9 @@
   #viewer3d .hint{position:absolute;left:12px;bottom:10px;font-size:11.5px;color:#33566e;background:rgba(255,255,255,.65);padding:3px 8px;border-radius:6px}
   .toolbar{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
   .toolbar select,.toolbar label{font-size:13px}
+  #layerpanel label{display:inline-flex;align-items:center;gap:5px;background:var(--card);
+    border:1px solid #dde4ea;border-radius:16px;padding:3px 11px 3px 7px;font-size:12.5px;cursor:pointer}
+  #layerpanel .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
   iframe.pdf{width:100%;height:620px;border:1px solid #dde4ea;border-radius:10px;background:#fff}
   pre.data{background:#101820;color:#cfe3d8;font-size:11.5px;line-height:1.45;padding:14px;border-radius:10px;overflow:auto;max-height:420px}
   details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;padding:6px 0}
@@ -187,15 +190,16 @@
   <div class="toolbar">
     <label for="selmodel"><b>Modelo:</b></label>
     <select id="selmodel">
-      <option value="variante">Variante auto-adrizante (casco 2.35 m + aparejo + flotador)</option>
+      <option value="variante">Variante auto-adrizante — completa, por capas</option>
       <option value="angosta">Opción D — casco angosto 1.80 m (referencia)</option>
     </select>
-    <label><input type="checkbox" id="chkwl" checked> línea de flotación</label>
     <span class="muted">Arrastrar = orbitar · rueda = zoom · clic derecho = mover</span>
   </div>
+  <div class="toolbar" id="layerpanel"><span class="muted">capas…</span></div>
   <div id="viewer3d"><div class="hint">cargando visor 3D…</div></div>
-  <p class="muted">El modelo completo por capas (quilla, timón, bancos-tanque, flotador,
-  flotaciones) está en el archivo Rhino:
+  <p class="muted">El visor muestra el modelo completo por capas — las mismas del archivo
+  Rhino — con un interruptor por capa (casco, bancos-tanque, quilla, timón, aparejo, velas,
+  flotador, flotaciones, secciones). Archivo fuente:
   <a href="autoadrizante/boat_autoadrizante.3dm" download>boat_autoadrizante.3dm</a> ·
   malla del casco: <a href="autoadrizante/hull_autoadrizante.stl" download>hull_autoadrizante.stl</a></p>
   <div class="grid g2">
@@ -388,50 +392,85 @@ try {
   scene.add(sun);
 
   const matHull = new THREE.MeshStandardMaterial({color: 0xb6c6d3, metalness: .05, roughness: .55, side: THREE.DoubleSide});
-  const matDark = new THREE.MeshStandardMaterial({color: 0x3c3c46, roughness: .5});
-  const matFloat = new THREE.MeshStandardMaterial({color: 0xc0392b, roughness: .45});
 
-  // línea de flotación
+  // plano de agua (siempre disponible como "capa" sintética)
   const wl = new THREE.Mesh(new THREE.PlaneGeometry(30, 30),
     new THREE.MeshStandardMaterial({color: 0x5a9cc8, transparent: true, opacity: .30, side: THREE.DoubleSide}));
   wl.position.set(3.2, 0, 0.217);
   scene.add(wl);
-  document.getElementById('chkwl').addEventListener('change', e => wl.visible = e.target.checked);
 
   const group = new THREE.Group();
   scene.add(group);
+  const panel = document.getElementById('layerpanel');
 
-  function rig() {
-    const g = new THREE.Group();
-    const mast = new THREE.Mesh(new THREE.CylinderGeometry(.05, .05, 8.6, 14), matDark);
-    mast.rotation.x = Math.PI / 2;             // cilindro Y -> eje Z
-    mast.position.set(4.25, 0, .86 + 4.3);
-    g.add(mast);
-    const boom = new THREE.Mesh(new THREE.CylinderGeometry(.04, .04, 2.95, 12), matDark);
-    boom.rotation.z = Math.PI / 2;
-    boom.position.set(2.87, 0, 1.8);
-    g.add(boom);
-    const fl = new THREE.Mesh(new THREE.SphereGeometry(1, 26, 18), matFloat);
-    fl.scale.set(.5, .17, .17);
-    fl.position.set(4.25, 0, 9.55);
-    g.add(fl);
-    return g;
+  const NAMES = {
+    'hull': 'casco', 'bench-tanks': 'bancos-tanque', 'keel': 'quilla',
+    'rudders': 'timón', 'rig': 'aparejo', 'sails': 'velas',
+    'flotador-tope': 'flotador de tope', 'waterlines': 'flotaciones',
+    'lines': 'líneas (secciones)',
+  };
+  const DEFAULT_OFF = new Set(['lines']);
+
+  function chip(label, colorCss, checked, onchange) {
+    const l = document.createElement('label');
+    const c = document.createElement('input');
+    c.type = 'checkbox'; c.checked = checked;
+    c.addEventListener('change', () => onchange(c.checked));
+    const sw = document.createElement('span');
+    sw.className = 'sw'; sw.style.background = colorCss;
+    l.append(c, sw, document.createTextNode(label));
+    return l;
+  }
+
+  function buildLayered(data) {
+    group.clear(); panel.innerHTML = '';
+    for (const key of data.order) {
+      const lay = data.layers[key];
+      if (!lay || (!lay.meshes.length && !lay.lines.length)) continue;
+      const [r, g, b] = lay.color;
+      const col = new THREE.Color(r / 255, g / 255, b / 255);
+      const lg = new THREE.Group();
+      const isSail = key === 'sails';
+      const mat = new THREE.MeshStandardMaterial({
+        color: col, roughness: .55, metalness: .05, side: THREE.DoubleSide,
+        transparent: isSail, opacity: isSail ? .45 : 1,
+      });
+      for (const m of lay.meshes) {
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.Float32BufferAttribute(m.v, 3));
+        geo.setIndex(m.f);
+        geo.computeVertexNormals();
+        lg.add(new THREE.Mesh(geo, mat));
+      }
+      const lmat = new THREE.LineBasicMaterial({color: col});
+      for (const pts of lay.lines) {
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+        lg.add(new THREE.Line(geo, lmat));
+      }
+      lg.visible = !DEFAULT_OFF.has(key);
+      group.add(lg);
+      panel.appendChild(chip(NAMES[key] || key, '#' + col.getHexString(),
+                             lg.visible, v => lg.visible = v));
+    }
+    panel.appendChild(chip('agua', '#5a9cc8', true, v => wl.visible = v));
   }
 
   const loader = new STLLoader();
-  const MODELS = {
-    variante: {url: 'autoadrizante/hull_autoadrizante.stl', rig: true},
-    angosta:  {url: 'out/hull_selfrighting.stl', rig: false},
-  };
-  function show(key) {
-    group.clear();
-    loader.load(MODELS[key].url, geo => {
-      geo.computeVertexNormals();
-      group.add(new THREE.Mesh(geo, matHull));
-      if (MODELS[key].rig) group.add(rig());
-    });
+  async function show(key) {
+    if (key === 'variante') {
+      const data = await (await fetch('autoadrizante/boat_web.json')).json();
+      buildLayered(data);
+    } else {
+      group.clear(); panel.innerHTML = '';
+      panel.appendChild(chip('agua', '#5a9cc8', wl.visible, v => wl.visible = v));
+      loader.load('out/hull_selfrighting.stl', geo => {
+        geo.computeVertexNormals();
+        group.add(new THREE.Mesh(geo, matHull));
+      });
+    }
   }
-  show('variante');
+  await show('variante');
   document.getElementById('selmodel').addEventListener('change', e => show(e.target.value));
 
   addEventListener('resize', () => {

@@ -267,13 +267,58 @@ def add_rig(model, attrs, design: Design, geom: HullGeometry) -> None:
                  [bow, hounds, (3.55, 0, boom_z - 0.15)], closed=True)
 
 
-def add_tanks(model, attr, design: Design) -> None:
-    """Bench seats = water ballast tanks: sealed boxes from sole to seat top."""
+def bench_mesh(geom: HullGeometry, design: Design, side: int) -> tuple[list, list]:
+    """Bench-tank solid lofted station a station, DENTRO del casco.
+
+    La caja constante anterior atravesaba la geometria: con francobordo bajo a
+    popa, un asiento a z=0.80 sobresale de la cubierta lateral local (~0.77) y
+    la cara exterior coincidia exactamente con la pared del cockpit
+    (z-fighting en los renders). Aqui la cara exterior queda 8 mm adentro de
+    la pared y la tapa se limita a 15 mm bajo el borde de cubierta local, asi
+    el banco sigue la linea de la cubierta hacia popa.
+    """
     cp = design.cockpit
+    secs: list[tuple[float, np.ndarray]] = []
+    for i, x in enumerate(geom.x):
+        if not (cp.x_aft <= x <= cp.x_fwd):
+            continue
+        yw = min(cp.half_width, geom.y_sheer[i] * 0.95)
+        yo = yw - 0.008  # cara exterior: 8 mm adentro de la pared
+        yi = cp.bench_inner_y
+        if yo - yi < 0.05:
+            continue
+        top = min(cp.bench_top_z, geom._deck_z_at(i, yw) - 0.015)
+        if top - cp.sole_z < 0.05:
+            continue
+        quad = np.array([[x, side * yi, cp.sole_z],
+                         [x, side * yo, cp.sole_z],
+                         [x, side * yo, top],
+                         [x, side * yi, top]], dtype=float)
+        secs.append((x, quad))
+    verts: list = []
+    faces: list = []
+    for _, q in secs:
+        verts.extend(q)
+    n = len(secs)
+    for i in range(n - 1):
+        a, b = 4 * i, 4 * (i + 1)
+        for k in range(4):
+            k2 = (k + 1) % 4
+            faces += [(a + k, b + k, b + k2), (a + k, b + k2, a + k2)]
+    # tapas de proa y popa
+    if n:
+        faces += [(0, 1, 2), (0, 2, 3)]
+        m = 4 * (n - 1)
+        faces += [(m, m + 2, m + 1), (m, m + 3, m + 2)]
+    return verts, faces
+
+
+def add_tanks(model, attr, design: Design, geom: HullGeometry) -> None:
+    """Bench seats = water ballast tanks, lofted to the hull (see bench_mesh)."""
     for s in (-1, 1):
-        y0, y1 = sorted((s * cp.bench_inner_y, s * cp.half_width))
-        add_mesh(model, attr, *box_mesh(cp.x_aft, cp.x_fwd, y0, y1,
-                                        cp.sole_z, cp.bench_top_z))
+        v, f = bench_mesh(geom, design, s)
+        if v:
+            add_mesh(model, attr, v, f)
 
 
 def add_waterlines(model, attr, z_light: float, z_loaded: float, loa: float) -> None:
@@ -332,7 +377,7 @@ def export(design: Design, tag: str) -> str:
     add_keel(model, attrs["keel"], d)
     add_rudders(model, attrs["rudders"], geom)
     add_rig(model, attrs, d, geom)
-    add_tanks(model, attrs["bench-tanks"], d)
+    add_tanks(model, attrs["bench-tanks"], d, geom)
     add_waterlines(model, attrs["waterlines"], z_light, z_loaded, d.hull.loa)
     add_lines(model, attrs["lines"], geom)
 
