@@ -1,0 +1,44 @@
+{
+ "equipo": "referencia-a2",
+ "valido": true,
+ "categoria": "referencia",
+ "comentario": "La variante elegida del proyecto: mastil sellado + flotador 60 L. Este es el puntaje a superar.",
+ "parametros": {
+  "beam_sheer": 2.35,
+  "sole_z": 0.385,
+  "bench_inner_y": 0.44,
+  "bench_top_z": 0.8,
+  "keel_draft": 1.29,
+  "keel_vcg_below_bl": 0.86,
+  "mast_height": 8.6,
+  "main_area": 14.0,
+  "jib_area": 8.0,
+  "float_volume_l": 60,
+  "spar_volume_l": 30,
+  "water_ballast_each_kg": 250,
+  "water_ballast_z": 0.48,
+  "battery_z": 0.22
+ },
+ "metricas": {
+  "desplazamiento_rosca_kg": 750.0,
+  "plomo_quilla_kg": 209.7,
+  "relacion_lastre_pct": 28.0,
+  "vcg_rosca_m": 0.258,
+  "limite_recuperacion_deg": 155.9,
+  "tortuga_residual_J": 292.0,
+  "gz_max_m": 1.021,
+  "francobordo_piso_carga_mm": 56.0,
+  "angulo_inundacion_deg": 37.0,
+  "sa_d_carga": 15.52,
+  "violaciones_sobre": []
+ },
+ "puntaje": {
+  "sobre (20)": 20.0,
+  "auto-adrizado (35)": 22.9,
+  "autoachique (10)": 7.0,
+  "inundacion (10)": 6.0,
+  "porte de vela (15)": 15.0,
+  "lastre (10)": 9.0
+ },
+ "total_auto": 79.9
+}

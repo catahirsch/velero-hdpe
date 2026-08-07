@@ -1,0 +1,19 @@
+{
+ "actualizado": null,
+ "filas": [
+  {
+   "equipo": "referencia-a2",
+   "categoria": "referencia",
+   "comentario": "La variante elegida del proyecto: mastil sellado + flotador 60 L. Este es el puntaje a superar.",
+   "total_auto": 79.9,
+   "jurado": null,
+   "total": 79.9,
+   "recuperacion": 155.9,
+   "francobordo": 56.0,
+   "sa_d": 15.52,
+   "lastre_pct": 28.0,
+   "violaciones": 0,
+   "gz": "resultados/referencia-a2/gz.png"
+  }
+ ]
+}

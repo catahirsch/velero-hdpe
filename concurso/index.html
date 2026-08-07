@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concurso de diseño naval con IA — velero HDPE 6.48 m</title>
+<style>
+  :root{--ink:#232d37;--accent:#285a82;--ok:#117733;--warn:#8a2b2b;--rule:#96a5b2;--bg:#f4f6f8;--card:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  a{color:var(--accent)}
+  header{background:#1d2733;color:#fff;padding:46px 24px 40px;text-align:center}
+  header h1{margin:0 0 6px;font-size:30px}
+  header p{margin:4px auto;max-width:760px;color:#c3cfda;font-size:15px;line-height:1.5}
+  header .cta{display:inline-block;margin:16px 8px 0;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600}
+  .cta.a{background:#e8622d;color:#fff}
+  .cta.b{background:transparent;color:#e8e2d4;border:1px solid #5a6c7c}
+  main{max-width:1020px;margin:0 auto;padding:30px 22px 90px}
+  section{margin-bottom:46px}
+  h2{color:var(--accent);font-size:21px;border-bottom:2px solid var(--rule);padding-bottom:6px}
+  .card{background:var(--card);border:1px solid #dde4ea;border-radius:10px;padding:16px 20px;margin:12px 0;box-shadow:0 1px 3px rgba(20,30,40,.06)}
+  .grid{display:grid;gap:14px;grid-template-columns:1fr 1fr 1fr}
+  .grid .card{margin:0}
+  .card h3{margin:2px 0 8px;font-size:15px;color:var(--accent)}
+  .card p{margin:0;font-size:13.5px;line-height:1.5}
+  .pts{float:right;font-weight:700;color:var(--ok);font-size:13px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--card)}
+  th{color:var(--accent);text-align:left;border-bottom:2px solid var(--rule);padding:7px 10px;font-size:12.5px}
+  td{border-bottom:1px solid #e3e9ee;padding:7px 10px}
+  tr.ref{background:#f2f6f0}
+  .muted{color:#5c6b78;font-size:13px}
+  ol.steps{font-size:14.5px;line-height:1.7}
+  code{background:#e9eef2;border-radius:4px;padding:1px 6px;font-size:12.5px}
+  .md{background:var(--card);border:1px solid #dde4ea;border-radius:10px;padding:6px 22px;font-size:14px;line-height:1.55;margin-top:10px}
+  .md h1{font-size:19px;color:var(--accent)} .md h2{font-size:15px;border:none;color:var(--accent)}
+  .md table{font-size:12.5px}
+  details summary{cursor:pointer;color:var(--accent);font-weight:600;padding:8px 0;font-size:15px}
+  footer{text-align:center;color:#5c6b78;font-size:12px;padding:20px}
+  img.gzmini{height:44px;border-radius:4px;vertical-align:middle}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Concurso de diseño naval con IA</h1>
+  <p><b>Para ingenieros e ingenieras navales (UTN)</b> — diseñá la mejor versión de un
+  velero abierto real de 6.48 m en HDPE usando IA como herramienta de ingeniería.
+  Tu entrega es un archivo de parámetros; el evaluador la convierte en un barco de verdad:
+  hidrostática exacta, curvas GZ 0–180°, presupuesto de pesos, y un puntaje que no se discute.</p>
+  <p class="muted">La IA propone · el ingeniero verifica · la física decide</p>
+  <a class="cta a" href="#participar">Cómo participar</a>
+  <a class="cta b" href="../index.html">Ver el proyecto del barco →</a>
+</header>
+
+<main>
+
+<section>
+  <h2>El problema (real)</h2>
+  <p>El brief pide un bote <b>abierto de 6 plazas</b>, 750 kg con lastre incluido, remolcable,
+  eléctrico, en HDPE — <b>y auto-adrizante</b>. El estudio del proyecto demostró que a 2.35 m de
+  manga el 180° literal es inalcanzable con plomo, y que la solución pasa por dónde ponés el
+  volumen sellado. La variante de referencia (mástil sellado + flotador de tope de 60 L) vuelve
+  sola hasta <b>156°</b> y suma <b>79.9/100</b> puntos automáticos. <b>Ese es el barco a vencer.</b></p>
+  <div class="grid">
+    <div class="card"><h3>D1 · Auto-adrizado <span class="pts">35 pts</span></h3>
+      <p>Superá los 156° de recuperación autónoma sin romper el brief. Cada palanca (manga, VCG, flotador, bancos) cobra en otro rubro.</p></div>
+    <div class="card"><h3>D2 · Autoachique <span class="pts">10 pts</span></h3>
+      <p>Piso sobre la flotación a plena carga (1730 kg). La referencia tiene +56 mm — la cota más justa del barco.</p></div>
+    <div class="card"><h3>D3 · Inundación <span class="pts">10 pts</span></h3>
+      <p>Ángulo de inundación a plena carga: la referencia embarca a 37°. Formas y francobordo lo mueven.</p></div>
+    <div class="card"><h3>D4 · Porte de vela <span class="pts">15 pts</span></h3>
+      <p>SA/D a plena carga en banda 15–18: vela para la tarde de calma sin volcar en la racha.</p></div>
+    <div class="card"><h3>D5 · Lastre <span class="pts">10 pts</span></h3>
+      <p>El plomo es el remanente del tope de 750 kg: cada kilo mal gastado sale de la quilla.</p></div>
+    <div class="card"><h3>D6 · El sobre <span class="pts">20 pts</span></h3>
+      <p>LOA/manga/DIS/vela/lastre/calado: usar el sobre completo sin pincharlo. Cada violación descuenta.</p></div>
+  </div>
+  <p class="muted">+ 40 pts de jurado: bitácora de IA (20), constructibilidad en HDPE e innovación (12), memoria (8).
+  Detalle completo: <a href="desafios.md">desafíos</a> · <a href="bases.md">bases</a>.</p>
+</section>
+
+<section id="participar">
+  <h2>Cómo participar</h2>
+  <ol class="steps">
+    <li>Fork de <a href="https://github.com/catahirsch/velero-hdpe">github.com/catahirsch/velero-hdpe</a>.</li>
+    <li>Copiá <code>concurso/plantilla_diseno.json</code> a <code>concurso/entregas/&lt;tu-equipo&gt;.json</code> y ajustá los 14 parámetros (rangos válidos incluidos en la plantilla).</li>
+    <li>Probá localmente cuantas veces quieras: <code>python3 -m concurso.evaluar concurso/entregas/&lt;tu-equipo&gt;.json</code> (~10 s por diseño).</li>
+    <li>Usá IA para todo lo que puedas — leer el modelo de cálculo, proponer variantes, escribir barridos — y <b>documentalo en la bitácora</b> (<code>entregas/&lt;equipo&gt;-bitacora.md</code>): qué propuso, qué estaba mal, cómo lo verificaron.</li>
+    <li>Pull request con JSON + bitácora + memoria (≤4 páginas). El PR es la inscripción.</li>
+  </ol>
+  <div class="card"><b>La regla de oro:</b> la IA propone, el ingeniero verifica. El evaluador es la misma
+  física para todos — una curva GZ no se convence con un buen prompt. Los mejores puntajes de bitácora van
+  a los equipos que documentan dónde la IA se equivocó y cómo lo atraparon.</div>
+</section>
+
+<section>
+  <h2>Leaderboard</h2>
+  <div class="card" style="overflow-x:auto">
+    <table id="lb">
+      <thead><tr><th>#</th><th>Equipo</th><th>Curva</th><th>Recupera hasta</th><th>Francobordo piso</th><th>SA/D</th><th>Lastre</th><th>Auto</th><th>Jurado</th><th>Total</th></tr></thead>
+      <tbody><tr><td colspan="10" class="muted">cargando leaderboard.json…</td></tr></tbody>
+    </table>
+  </div>
+  <p class="muted">Se actualiza con cada PR evaluado. La fila sombreada es la referencia del proyecto — el mínimo a superar.</p>
+</section>
+
+<section>
+  <h2>El Líder de IA</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr">
+    <div class="card"><h3>Humano — Director/a de IA</h3>
+      <p>Mantiene el evaluador y el ranking, dicta el taller inicial «IA para ingeniería naval»
+      (cómo hacer que un LLM escriba y critique código de cálculo, cómo detectar alucinaciones numéricas),
+      audita las bitácoras y arbitra dudas técnicas.</p></div>
+    <div class="card"><h3>Agente — el Copiloto del concurso</h3>
+      <p>Un asistente de IA oficial, cargado con este repositorio, disponible para todos los equipos por
+      igual: explica el modelo de cálculo, interpreta resultados del evaluador y hace pre-chequeo de
+      entregas. Nivela la cancha: nadie pierde por no tener acceso a herramientas.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Bases y cronograma</h2>
+  <details><summary>Bases completas</summary><div class="md" id="md-bases"><p class="muted">cargando…</p></div></details>
+  <details><summary>Los desafíos en detalle</summary><div class="md" id="md-desafios"><p class="muted">cargando…</p></div></details>
+</section>
+
+</main>
+
+<footer>Proyecto abierto: <a href="../index.html">visor del barco</a> ·
+<a href="https://github.com/catahirsch/velero-hdpe">repositorio</a> ·
+evaluador y física en <code>calc/</code> — reproducible por cualquiera.</footer>
+
+<script>
+(async () => {
+  try {
+    const L = await (await fetch('leaderboard.json')).json();
+    const tb = document.querySelector('#lb tbody');
+    tb.innerHTML = '';
+    L.filas.forEach((r, i) => {
+      const tr = document.createElement('tr');
+      if (r.categoria === 'referencia') tr.className = 'ref';
+      tr.innerHTML = `<td>${i + 1}</td><td><b>${r.equipo}</b><br><span class="muted">${r.comentario || ''}</span></td>` +
+        `<td><a href="${r.gz}" target="_blank"><img class="gzmini" src="${r.gz}"></a></td>` +
+        `<td>${r.recuperacion}°</td><td>${r.francobordo} mm</td><td>${r.sa_d}</td>` +
+        `<td>${r.lastre_pct}%</td><td><b>${r.total_auto}</b></td>` +
+        `<td>${r.jurado ?? '—'}</td><td><b>${r.total}</b></td>`;
+      tb.appendChild(tr);
+    });
+  } catch (e) {
+    document.querySelector('#lb tbody').innerHTML =
+      '<tr><td colspan="10" class="muted">no se pudo cargar el leaderboard (¿servido por http?)</td></tr>';
+  }
+  try {
+    const marked = (await import('https://cdn.jsdelivr.net/npm/marked@12/lib/marked.esm.js')).marked;
+    for (const [sel, url] of [['#md-bases', 'bases.md'], ['#md-desafios', 'desafios.md']]) {
+      try { document.querySelector(sel).innerHTML = marked.parse(await (await fetch(url)).text()); }
+      catch (e) { document.querySelector(sel).innerHTML = `<p><a href="${url}">abrir ${url}</a></p>`; }
+    }
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

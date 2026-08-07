@@ -80,6 +80,16 @@ shows the hull STL (variant with rig + masthead float, and the narrow Option D
 reference) in an orbitable three.js viewer. Regenerating the model outputs
 updates the page — nothing on it is hand-copied.
 
+## Competition (concurso/)
+
+A design competition for UTN naval-engineering students built on this project:
+teams submit a 14-parameter JSON, `python3 -m concurso.evaluar` turns it into a
+real boat on the same physics chain (GZ curves, weight budget, envelope) and
+scores it; `concurso/leaderboard.py` builds the ranking shown at
+[/concurso/](https://catahirsch.github.io/velero-hdpe/concurso/). Rules in
+`concurso/bases.md`, challenges in `concurso/desafios.md`. The reference
+variant scores 79.9/100 — that's the boat to beat.
+
 ## Running it
 
 ```bash
